@@ -507,7 +507,7 @@
 </footer>
 
 <script>
-  const CORRECT = 'IdentityCustoms', 'identitycustoms', 'identity customs', 'Identity Customs', 'Identity', 'game', 'brrr', 'marcher', 'ohyea', 'upset', 'mines';
+  const CORRECT = ['IdentityCustoms', 'Password2', 'VIPaccess'];
   const VIDEO_SRC = 'https://www.youtube.com/embed/hSTOnDBhfMg?si=oGLog--mmi5OMDAn&autoplay=1';
 
   const input = document.getElementById('pw-input');
@@ -520,7 +520,7 @@
 
   function checkPassword() {
     const val = input.value.trim();
-    if (val === CORRECT.includes(val)) {
+    if (CORRECT.includes(val)) {
       unlockContent();
     } else {
       errorMsg.classList.add('visible');
