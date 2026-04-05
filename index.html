@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IDENTITY CUSTOMS</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --black: #0a0a0a;
+    --white: #f0ede6;
+    --red: #c8001e;
+    --yellow: #e8d800;
+    --border: 3px solid #0a0a0a;
+  }
+
+  body {
+    background: var(--white);
+    color: var(--black);
+    font-family: 'Courier New', Courier, monospace;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ── HEADER ── */
+  header {
+    border-bottom: var(--border);
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: stretch;
+  }
+
+  .header-title {
+    padding: 2rem 2.5rem;
+    border-right: var(--border);
+  }
+
+  .header-title h1 {
+    font-size: clamp(2.5rem, 6vw, 5rem);
+    font-weight: 900;
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
+    line-height: 0.92;
+  }
+
+  .header-title h1 span {
+    display: block;
+    color: var(--red);
+  }
+
+  .header-meta {
+    padding: 1.5rem 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-width: 180px;
+  }
+
+  .header-meta .tag {
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    border: 2px solid var(--black);
+    display: inline-block;
+    padding: 4px 8px;
+    font-weight: 700;
+  }
+
+  .header-meta .status {
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--red);
+    font-weight: 700;
+  }
+
+  /* ── MARQUEE STRIP ── */
+  .marquee-strip {
+    background: var(--black);
+    color: var(--yellow);
+    padding: 10px 0;
+    overflow: hidden;
+    border-bottom: var(--border);
+    white-space: nowrap;
+  }
+
+  .marquee-inner {
+    display: inline-block;
+    animation: scroll 18s linear infinite;
+    font-size: 0.75rem;
+    letter-spacing: 0.3em;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+
+  @keyframes scroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  /* ── MAIN GRID ── */
+  main {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: calc(100vh - 160px);
+  }
+
+  /* ── LEFT PANEL ── */
+  .left-panel {
+    border-right: var(--border);
+    display: flex;
+    flex-direction: column;
+  }
+
+  .left-panel .panel-label {
+    background: var(--black);
+    color: var(--white);
+    padding: 0.6rem 1.5rem;
+    font-size: 0.65rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    font-weight: 700;
+    border-bottom: var(--border);
+  }
+
+  .password-zone {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem 2rem;
+    gap: 2rem;
+  }
+
+  .lock-graphic {
+    width: 80px;
+    height: 80px;
+  }
+
+  .gate-text {
+    text-align: center;
+  }
+
+  .gate-text h2 {
+    font-size: 1.5rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    line-height: 1.1;
+    margin-bottom: 0.5rem;
+  }
+
+  .gate-text p {
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #555;
+  }
+
+  .password-form {
+    width: 100%;
+    max-width: 320px;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .pw-input {
+    background: var(--white);
+    border: 3px solid var(--black);
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    padding: 0.9rem 1rem;
+    outline: none;
+    width: 100%;
+    text-transform: uppercase;
+    color: var(--black);
+    transition: background 0.1s;
+  }
+
+  .pw-input:focus {
+    background: var(--yellow);
+  }
+
+  .pw-input::placeholder {
+    color: #aaa;
+    font-weight: 400;
+    letter-spacing: 0.05em;
+    text-transform: none;
+  }
+
+  .pw-btn {
+    background: var(--black);
+    color: var(--yellow);
+    border: 3px solid var(--black);
+    border-top: none;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    padding: 0.9rem 1rem;
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s;
+    width: 100%;
+  }
+
+  .pw-btn:hover {
+    background: var(--red);
+    border-color: var(--red);
+    color: var(--white);
+  }
+
+  .pw-btn:active {
+    transform: translateY(1px);
+  }
+
+  .error-msg {
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--red);
+    font-weight: 700;
+    text-align: center;
+    margin-top: 0.75rem;
+    min-height: 1rem;
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+
+  .error-msg.visible { opacity: 1; }
+
+  /* ── RIGHT PANEL ── */
+  .right-panel {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .right-panel .panel-label {
+    background: var(--red);
+    color: var(--white);
+    padding: 0.6rem 1.5rem;
+    font-size: 0.65rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    font-weight: 700;
+    border-bottom: var(--border);
+  }
+
+  /* LOCKED STATE */
+  .locked-placeholder {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    padding: 3rem;
+    border: none;
+    background: repeating-linear-gradient(
+      45deg,
+      var(--white),
+      var(--white) 10px,
+      #e8e5de 10px,
+      #e8e5de 20px
+    );
+  }
+
+  .locked-placeholder .big-x {
+    font-size: 6rem;
+    font-weight: 900;
+    color: var(--black);
+    opacity: 0.12;
+    line-height: 1;
+    user-select: none;
+  }
+
+  .locked-placeholder .access-denied {
+    font-size: 0.7rem;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: var(--black);
+    opacity: 0.4;
+    text-align: center;
+  }
+
+  /* UNLOCKED STATE */
+  .video-container {
+    flex: 1;
+    display: none;
+    flex-direction: column;
+    background: var(--black);
+  }
+
+  .video-container.active {
+    display: flex;
+  }
+
+  .video-wrapper {
+    position: relative;
+    flex: 1;
+    min-height: 300px;
+  }
+
+  .video-wrapper iframe {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    border: none;
+    display: block;
+  }
+
+  .video-footer {
+    background: var(--yellow);
+    border-top: var(--border);
+    padding: 0.75rem 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .video-footer span {
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--black);
+  }
+
+  .lock-btn {
+    background: none;
+    border: 2px solid var(--black);
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    cursor: pointer;
+    color: var(--black);
+    transition: background 0.15s;
+  }
+
+  .lock-btn:hover { background: var(--black); color: var(--yellow); }
+
+  /* ── FOOTER ── */
+  footer {
+    border-top: var(--border);
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .footer-cell {
+    padding: 1.25rem 1.5rem;
+    border-right: var(--border);
+  }
+
+  .footer-cell:last-child { border-right: none; }
+
+  .footer-cell .label {
+    font-size: 0.6rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: #888;
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  .footer-cell .value {
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 680px) {
+    main { grid-template-columns: 1fr; }
+    .left-panel { border-right: none; border-bottom: var(--border); }
+    footer { grid-template-columns: 1fr 1fr; }
+    .footer-cell:nth-child(2) { border-right: none; }
+    .footer-cell:last-child { grid-column: span 2; border-top: var(--border); }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-title">
+    <h1>Identity<span>Customs</span></h1>
+  </div>
+  <div class="header-meta">
+    <span class="tag">Restricted</span>
+    <span class="status">&#9679; Access Control Active</span>
+  </div>
+</header>
+
+<div class="marquee-strip">
+  <span class="marquee-inner">
+    &nbsp;&nbsp;&nbsp;&nbsp;&#x25A0; IDENTITY CUSTOMS &nbsp;&nbsp;&#x2014;&nbsp;&nbsp; AUTHORIZED PERSONNEL ONLY &nbsp;&nbsp;&#x2014;&nbsp;&nbsp; ENTER CREDENTIALS TO PROCEED &nbsp;&nbsp;&#x2014;&nbsp;&nbsp; IDENTITY CUSTOMS &nbsp;&nbsp;&#x2014;&nbsp;&nbsp; AUTHORIZED PERSONNEL ONLY &nbsp;&nbsp;&#x2014;&nbsp;&nbsp; ENTER CREDENTIALS TO PROCEED &nbsp;&nbsp;&#x2014;&nbsp;&nbsp; IDENTITY CUSTOMS &nbsp;&nbsp;&#x2014;&nbsp;&nbsp; AUTHORIZED PERSONNEL ONLY &nbsp;&nbsp;&#x2014;&nbsp;&nbsp; ENTER CREDENTIALS TO PROCEED &nbsp;&nbsp;&#x2014;&nbsp;&nbsp;
+  </span>
+</div>
+
+<main>
+  <!-- LEFT: PASSWORD PANEL -->
+  <div class="left-panel" id="left-panel">
+    <div class="panel-label">&#x25A0; Authentication Required</div>
+    <div class="password-zone">
+
+      <svg class="lock-graphic" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="10" y="36" width="60" height="38" fill="#0a0a0a"/>
+        <rect x="18" y="44" width="44" height="22" fill="#f0ede6"/>
+        <path d="M24 36V26C24 15.5 56 15.5 56 26V36" stroke="#0a0a0a" stroke-width="5" fill="none"/>
+        <circle cx="40" cy="55" r="6" fill="#c8001e"/>
+        <rect x="38" y="55" width="4" height="9" fill="#c8001e"/>
+      </svg>
+
+      <div class="gate-text">
+        <h2>Clearance<br>Required</h2>
+        <p>Enter access code to view content</p>
+      </div>
+
+      <div class="password-form">
+        <input
+          class="pw-input"
+          id="pw-input"
+          type="password"
+          placeholder="Access code..."
+          autocomplete="off"
+          spellcheck="false"
+          maxlength="32"
+        />
+        <button class="pw-btn" id="pw-btn" onclick="checkPassword()">
+          &#x25BA;&nbsp; Authorize Access
+        </button>
+        <div class="error-msg" id="error-msg">Access denied — invalid code</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- RIGHT: VIDEO PANEL -->
+  <div class="right-panel" id="right-panel">
+    <div class="panel-label" id="panel-label">&#x25A0; Content — Locked</div>
+
+    <div class="locked-placeholder" id="locked-placeholder">
+      <div class="big-x">&#x2715;</div>
+      <p class="access-denied">Authenticate to unlock<br>restricted content</p>
+    </div>
+
+    <div class="video-container" id="video-container">
+      <div class="video-wrapper">
+        <iframe
+          id="yt-iframe"
+          src=""
+          title="Identity Customs"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerpolicy="strict-origin-when-cross-origin"
+          allowfullscreen>
+        </iframe>
+      </div>
+      <div class="video-footer">
+        <span>&#x2713; Access Granted</span>
+        <button class="lock-btn" onclick="lockContent()">&#x25A0; Lock</button>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="footer-cell">
+    <span class="label">System</span>
+    <span class="value">Identity Customs</span>
+  </div>
+  <div class="footer-cell">
+    <span class="label">Clearance Level</span>
+    <span class="value" id="clearance-level">None</span>
+  </div>
+  <div class="footer-cell">
+    <span class="label">Status</span>
+    <span class="value" id="status-value">Awaiting Auth</span>
+  </div>
+</footer>
+
+<script>
+  const CORRECT = 'IdentityCustoms';
+  const VIDEO_SRC = 'https://www.youtube.com/embed/hSTOnDBhfMg?si=oGLog--mmi5OMDAn&autoplay=1';
+
+  const input = document.getElementById('pw-input');
+  const errorMsg = document.getElementById('error-msg');
+
+  input.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') checkPassword();
+    errorMsg.classList.remove('visible');
+  });
+
+  function checkPassword() {
+    const val = input.value.trim();
+    if (val === CORRECT) {
+      unlockContent();
+    } else {
+      errorMsg.classList.add('visible');
+      input.value = '';
+      input.focus();
+      input.style.background = '#ffd6d6';
+      setTimeout(() => { input.style.background = ''; }, 600);
+    }
+  }
+
+  function unlockContent() {
+    document.getElementById('locked-placeholder').style.display = 'none';
+    const vc = document.getElementById('video-container');
+    vc.classList.add('active');
+    document.getElementById('yt-iframe').src = VIDEO_SRC;
+    document.getElementById('panel-label').textContent = '\u25A0 Content \u2014 Authorized';
+    document.getElementById('panel-label').style.background = '#0a7a3e';
+    document.getElementById('clearance-level').textContent = 'Full Access';
+    document.getElementById('status-value').textContent = 'Authenticated';
+
+    const lp = document.getElementById('left-panel');
+    const pz = lp.querySelector('.password-zone');
+    pz.innerHTML = `
+      <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
+        <circle cx="32" cy="32" r="30" stroke="#0a0a0a" stroke-width="3"/>
+        <path d="M18 33l10 10 18-20" stroke="#0a7a3e" stroke-width="4" stroke-linecap="square"/>
+      </svg>
+      <div class="gate-text">
+        <h2>Access<br>Granted</h2>
+        <p>Identity verified &mdash; enjoy the content</p>
+      </div>
+    `;
+  }
+
+  function lockContent() {
+    document.getElementById('yt-iframe').src = '';
+    document.getElementById('video-container').classList.remove('active');
+    document.getElementById('locked-placeholder').style.display = '';
+    document.getElementById('panel-label').textContent = '\u25A0 Content \u2014 Locked';
+    document.getElementById('panel-label').style.background = '';
+    document.getElementById('clearance-level').textContent = 'None';
+    document.getElementById('status-value').textContent = 'Awaiting Auth';
+    const pz = document.querySelector('.password-zone');
+    location.reload();
+  }
+</script>
+</body>
+</html>
