@@ -132,16 +132,39 @@
     justify-content: center;
     padding: 3rem 2rem;
     gap: 2rem;
+    position: relative;
+    background-image: url('Screenshot 2026-04-05 181816.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
+  .password-zone::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(10, 10, 10, 0.75);
+    z-index: 0;
+  }
+
+  .password-zone > * {
+    position: relative;
+    z-index: 1;
   }
 
   .lock-graphic {
-    width: 80px;
-    height: 80px;
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+    filter: drop-shadow(0 0 14px rgba(200,0,30,0.5));
   }
 
   .gate-text {
     text-align: center;
   }
+
+  .gate-text h2 { color: var(--white); }
+  .gate-text p { color: #bbb; }
 
   .gate-text h2 {
     font-size: 1.5rem;
@@ -413,13 +436,7 @@
     <div class="panel-label">&#x25A0; Authentication Required</div>
     <div class="password-zone">
 
-      <svg class="lock-graphic" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <rect x="10" y="36" width="60" height="38" fill="#0a0a0a"/>
-        <rect x="18" y="44" width="44" height="22" fill="#f0ede6"/>
-        <path d="M24 36V26C24 15.5 56 15.5 56 26V36" stroke="#0a0a0a" stroke-width="5" fill="none"/>
-        <circle cx="40" cy="55" r="6" fill="#c8001e"/>
-        <rect x="38" y="55" width="4" height="9" fill="#c8001e"/>
-      </svg>
+      <img src="gamer.svg" class="lock-graphic" alt="Identity Customs" />
 
       <div class="gate-text">
         <h2>Clearance<br>Required</h2>
