@@ -436,7 +436,10 @@
     <div class="panel-label">&#x25A0; Authentication Required</div>
     <div class="password-zone">
 
-      <img src="gamer.svg" class="lock-graphic" alt="Identity Customs" />
+      <div class="idle-anim">
+        <img src="gamer.svg" class="lock-graphic frame" id="frame1" alt="Identity Customs" />
+        <img src="gamer2.svg" class="lock-graphic frame" id="frame2" alt="Identity Customs" style="display:none;" />
+      </div>
 
       <div class="gate-text">
         <h2>Clearance<br>Required</h2>
@@ -507,7 +510,27 @@
 </footer>
 
 <script>
-  const CORRECT = ['IdentityCustoms', 'identity', 'mines', 'brrr', 'ohyea', 'game', 'upset', 'marcher arrant', 'aemo'];
+  // idle bounce animation
+  const f1 = document.getElementById('frame1');
+  const f2 = document.getElementById('frame2');
+  let activeFrame = 1;
+  const FRAME_DURATION = [200, 600]; // ms on frame2 (short), frame1 (tall)
+  function cycleFrame() {
+    if (activeFrame === 1) {
+      f1.style.display = 'none';
+      f2.style.display = 'block';
+      activeFrame = 2;
+      setTimeout(cycleFrame, FRAME_DURATION[0]);
+    } else {
+      f2.style.display = 'none';
+      f1.style.display = 'block';
+      activeFrame = 1;
+      setTimeout(cycleFrame, FRAME_DURATION[1]);
+    }
+  }
+  setTimeout(cycleFrame, FRAME_DURATION[1]);
+
+  const CORRECT = [const CORRECT = ['IdentityCustoms', 'identity', 'mines', 'brrr', 'ohyea', 'game', 'upset', 'marcher arrant', 'aemo', '2buck', '2BUCK','jon'];
   const VIDEO_SRC = 'https://www.youtube.com/embed/hSTOnDBhfMg?si=oGLog--mmi5OMDAn&autoplay=1';
 
   const input = document.getElementById('pw-input');
