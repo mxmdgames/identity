@@ -16,27 +16,30 @@
   }
 
   body {
-    background: var(--white);
-    color: var(--black);
+    background-image: url('Screenshot 2026-04-05 181816.png');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-color: #0a0a0a;
+    color: var(--white);
     font-family: 'Courier New', Courier, monospace;
     min-height: 100vh;
     overflow-x: hidden;
   }
 
-  /* ── HEADER ── */
   header {
-    border-bottom: var(--border);
+    border-bottom: 3px solid rgba(240,237,230,0.3);
     display: grid;
     grid-template-columns: 1fr auto;
     align-items: stretch;
     position: relative;
     z-index: 10;
-    background: var(--white);
+    background: rgba(10,10,10,0.45);
   }
 
   .header-title {
     padding: 2rem 2.5rem;
-    border-right: var(--border);
+    border-right: 3px solid rgba(240,237,230,0.3);
   }
 
   .header-title h1 {
@@ -45,6 +48,7 @@
     letter-spacing: -0.02em;
     text-transform: uppercase;
     line-height: 0.92;
+    color: var(--white);
   }
 
   .header-title h1 span {
@@ -64,7 +68,8 @@
     font-size: 0.65rem;
     letter-spacing: 0.2em;
     text-transform: uppercase;
-    border: 2px solid var(--black);
+    border: 2px solid rgba(240,237,230,0.5);
+    color: var(--white);
     display: inline-block;
     padding: 4px 8px;
     font-weight: 700;
@@ -75,17 +80,18 @@
     letter-spacing: 0.2em;
     text-transform: uppercase;
     font-weight: 700;
-    color: var(--black);
+    color: var(--white);
     text-decoration: none;
-    border: 2px solid var(--black);
+    border: 2px solid rgba(240,237,230,0.5);
     padding: 4px 8px;
     display: inline-block;
     transition: background 0.15s;
   }
 
   .back-link:hover {
-    background: var(--black);
-    color: var(--yellow);
+    background: var(--yellow);
+    color: var(--black);
+    border-color: var(--yellow);
   }
 
   /* ── MARQUEE ── */
@@ -114,24 +120,20 @@
     100% { transform: translateX(-50%); }
   }
 
-  /* ── HERO — fixed background ── */
+  /* ── HERO ── */
   .hero {
     position: relative;
     min-height: 60vh;
     display: flex;
     align-items: flex-end;
-    background-image: url('Screenshot 2026-04-05 181816.png');
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
-    border-bottom: var(--border);
+    border-bottom: 3px solid rgba(240,237,230,0.2);
   }
 
   .hero::before {
     content: '';
     position: absolute;
     inset: 0;
-    background: rgba(10,10,10,0.6);
+    background: rgba(10,10,10,0.3);
   }
 
   .hero-text {
@@ -170,20 +172,21 @@
   }
 
   .section {
-    border-bottom: var(--border);
+    border-bottom: 3px solid rgba(240,237,230,0.2);
     display: grid;
     grid-template-columns: 220px 1fr;
+    background: rgba(10,10,10,0.35);
   }
 
   .section-label {
-    background: var(--black);
+    background: rgba(10,10,10,0.55);
     color: var(--yellow);
     padding: 2rem 1.5rem;
     font-size: 0.65rem;
     letter-spacing: 0.3em;
     text-transform: uppercase;
     font-weight: 700;
-    border-right: var(--border);
+    border-right: 3px solid rgba(240,237,230,0.2);
     writing-mode: horizontal-tb;
     display: flex;
     align-items: flex-start;
@@ -200,12 +203,13 @@
     letter-spacing: 0.03em;
     margin-bottom: 1rem;
     line-height: 1.1;
+    color: var(--white);
   }
 
   .section-body p {
     font-size: 0.9rem;
     line-height: 1.8;
-    color: #333;
+    color: rgba(240,237,230,0.85);
     margin-bottom: 1rem;
   }
 
@@ -220,8 +224,9 @@
     font-size: 0.85rem;
     line-height: 1.7;
     padding: 0.3rem 0;
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid rgba(240,237,230,0.15);
     letter-spacing: 0.05em;
+    color: rgba(240,237,230,0.85);
   }
 
   .section-body ul li::before {
@@ -243,7 +248,8 @@
     font-weight: 700;
     letter-spacing: 0.2em;
     text-transform: uppercase;
-    border: 2px solid var(--black);
+    border: 2px solid rgba(240,237,230,0.4);
+    color: var(--white);
     padding: 4px 10px;
     display: inline-block;
   }
@@ -253,14 +259,15 @@
 
   /* ── FOOTER ── */
   footer {
-    border-top: var(--border);
+    border-top: 3px solid rgba(240,237,230,0.2);
     display: grid;
     grid-template-columns: repeat(3, 1fr);
+    background: rgba(10,10,10,0.55);
   }
 
   .footer-cell {
     padding: 1.25rem 1.5rem;
-    border-right: var(--border);
+    border-right: 3px solid rgba(240,237,230,0.2);
   }
 
   .footer-cell:last-child { border-right: none; }
@@ -270,7 +277,7 @@
     letter-spacing: 0.25em;
     text-transform: uppercase;
     font-weight: 700;
-    color: #888;
+    color: rgba(240,237,230,0.45);
     display: block;
     margin-bottom: 4px;
   }
@@ -280,6 +287,7 @@
     font-weight: 700;
     letter-spacing: 0.05em;
     text-transform: uppercase;
+    color: var(--white);
   }
 
   /* ── RESPONSIVE ── */
