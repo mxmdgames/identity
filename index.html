@@ -510,27 +510,23 @@
 </footer>
 
 <script>
-  // idle bounce animation
+  // idle bounce animation — CSP-safe, no eval/string timers
   const f1 = document.getElementById('frame1');
   const f2 = document.getElementById('frame2');
-  let activeFrame = 1;
-  const FRAME_DURATION = [200, 600]; // ms on frame2 (short), frame1 (tall)
-  function cycleFrame() {
-    if (activeFrame === 1) {
-      f1.style.display = 'none';
-      f2.style.display = 'block';
-      activeFrame = 2;
-      setTimeout(cycleFrame, FRAME_DURATION[0]);
-    } else {
-      f2.style.display = 'none';
-      f1.style.display = 'block';
-      activeFrame = 1;
-      setTimeout(cycleFrame, FRAME_DURATION[1]);
-    }
-  }
-  setTimeout(cycleFrame, FRAME_DURATION[1]);
+  let tick = 0;
+  // pattern: show f1 for 3 ticks (600ms), f2 for 1 tick (200ms), repeat
+  setInterval(function() {
+    tick = (tick + 1) % 4;
+    const showF2 = tick === 3;
+    f1.style.display = showF2 ? 'none' : 'block';
+    f2.style.display = showF2 ? 'block' : 'none';
+  }, 200);
 
-  const CORRECT = [const CORRECT = ['IdentityCustoms', 'identity', 'mines', 'brrr', 'ohyea', 'game', 'upset', 'marcher arrant', 'aemo', '2buck', '2BUCK','jon'];
+  const CORRECT = ['identitycustoms', 'identity', 'mines', 'brrr', 'ohyea', 'game', 'upset', 'marcherarrant', 'aemo', '2buck', 'jon'];
+
+  function normalize(str) {
+    return str.toLowerCase().replace(/\s+/g, '');
+  }
   const VIDEO_SRC = 'https://www.youtube.com/embed/hSTOnDBhfMg?si=oGLog--mmi5OMDAn&autoplay=1';
 
   const input = document.getElementById('pw-input');
@@ -543,7 +539,7 @@
 
   function checkPassword() {
     const val = input.value.trim();
-    if (CORRECT.includes(val)) {
+    if (CORRECT.includes(normalize(val))) {
       unlockContent();
     } else {
       errorMsg.classList.add('visible');
