@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; frame-src https://www.youtube.com;">
 <title>IDENTITY CUSTOMS</title>
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -480,7 +481,7 @@
           spellcheck="false"
           maxlength="32"
         />
-        <button class="pw-btn" id="pw-btn" onclick="checkPassword()">
+        <button class="pw-btn" id="pw-btn">
           &#x25BA;&nbsp; Authorize Access
         </button>
         <div class="error-msg" id="error-msg">Access denied — invalid code</div>
@@ -512,7 +513,7 @@
       </div>
       <div class="video-footer">
         <span>&#x2713; Access Granted</span>
-        <button class="lock-btn" onclick="lockContent()">&#x25A0; Lock</button>
+        <button class="lock-btn" id="lock-btn">&#x25A0; Lock</button>
       </div>
     </div>
   </div>
@@ -533,83 +534,6 @@
   </div>
 </footer>
 
-<script>
-  // idle bounce animation — CSP-safe, no eval/string timers
-  const f1 = document.getElementById('frame1');
-  const f2 = document.getElementById('frame2');
-  let tick = 0;
-  // pattern: show f1 for 3 ticks (600ms), f2 for 1 tick (200ms), repeat
-  setInterval(function() {
-    tick = (tick + 1) % 4;
-    const showF2 = tick === 3;
-    f1.style.display = showF2 ? 'none' : 'block';
-    f2.style.display = showF2 ? 'block' : 'none';
-  }, 200);
-
-  const CORRECT = ['identitycustoms', 'identity', 'mines', 'brrr', 'ohyea', 'game', 'upset', 'marcherarrant', 'aemo', '2buck', 'jon'];
-
-  function normalize(str) {
-    return str.toLowerCase().replace(/\s+/g, '');
-  }
-  const VIDEO_SRC = 'https://www.youtube.com/embed/hSTOnDBhfMg?si=oGLog--mmi5OMDAn&autoplay=1';
-
-  const input = document.getElementById('pw-input');
-  const errorMsg = document.getElementById('error-msg');
-
-  input.addEventListener('keydown', function(e) {
-    if (e.key === 'Enter') checkPassword();
-    errorMsg.classList.remove('visible');
-  });
-
-  function checkPassword() {
-    const val = input.value.trim();
-    if (CORRECT.includes(normalize(val))) {
-      unlockContent();
-    } else {
-      errorMsg.classList.add('visible');
-      input.value = '';
-      input.focus();
-      input.style.background = '#ffd6d6';
-      setTimeout(() => { input.style.background = ''; }, 600);
-    }
-  }
-
-  function unlockContent() {
-    document.getElementById('locked-placeholder').style.display = 'none';
-    const vc = document.getElementById('video-container');
-    vc.classList.add('active');
-    document.getElementById('yt-iframe').src = VIDEO_SRC;
-    document.getElementById('panel-label').textContent = '\u25A0 Content \u2014 Authorized';
-    document.getElementById('panel-label').style.background = '#0a7a3e';
-    document.getElementById('clearance-level').textContent = 'Full Access';
-    document.getElementById('status-value').textContent = 'Authenticated';
-
-    const lp = document.getElementById('left-panel');
-    const pz = lp.querySelector('.password-zone');
-    pz.innerHTML = `
-      <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
-        <circle cx="32" cy="32" r="30" stroke="#f0ede6" stroke-width="3"/>
-        <path d="M18 33l10 10 18-20" stroke="#0a7a3e" stroke-width="4" stroke-linecap="square"/>
-      </svg>
-      <div class="gate-text">
-        <h2>Access<br>Granted</h2>
-        <p>Identity verified &mdash; enjoy the content</p>
-      </div>
-      <a href="info.html" class="info-link">&#x25BA;&nbsp; About Identity Customs</a>
-    `;
-  }
-
-  function lockContent() {
-    document.getElementById('yt-iframe').src = '';
-    document.getElementById('video-container').classList.remove('active');
-    document.getElementById('locked-placeholder').style.display = '';
-    document.getElementById('panel-label').textContent = '\u25A0 Content \u2014 Locked';
-    document.getElementById('panel-label').style.background = '';
-    document.getElementById('clearance-level').textContent = 'None';
-    document.getElementById('status-value').textContent = 'Awaiting Auth';
-    const pz = document.querySelector('.password-zone');
-    location.reload();
-  }
-</script>
+<script src="main.js" defer></script>
 </body>
 </html>
