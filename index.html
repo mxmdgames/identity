@@ -257,6 +257,30 @@
 
   .error-msg.visible { opacity: 1; }
 
+  .info-link {
+    display: block;
+    background: var(--yellow);
+    color: var(--black);
+    border: 3px solid var(--white);
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    padding: 0.9rem 1.5rem;
+    text-decoration: none;
+    text-align: center;
+    width: 100%;
+    max-width: 320px;
+    transition: background 0.15s, color 0.15s;
+  }
+
+  .info-link:hover {
+    background: var(--black);
+    color: var(--yellow);
+    border-color: var(--yellow);
+  }
+
   /* ── RIGHT PANEL ── */
   .right-panel {
     display: flex;
@@ -564,13 +588,14 @@
     const pz = lp.querySelector('.password-zone');
     pz.innerHTML = `
       <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
-        <circle cx="32" cy="32" r="30" stroke="#0a0a0a" stroke-width="3"/>
+        <circle cx="32" cy="32" r="30" stroke="#f0ede6" stroke-width="3"/>
         <path d="M18 33l10 10 18-20" stroke="#0a7a3e" stroke-width="4" stroke-linecap="square"/>
       </svg>
       <div class="gate-text">
         <h2>Access<br>Granted</h2>
         <p>Identity verified &mdash; enjoy the content</p>
       </div>
+      <a href="info.html" class="info-link">&#x25BA;&nbsp; About Identity Customs</a>
     `;
   }
 
